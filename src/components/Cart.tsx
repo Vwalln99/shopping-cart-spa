@@ -23,7 +23,7 @@ export default function Cart() {
                 value={item.quantity}
                 onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
               />
-              <button onClick={() => removeItem(item.id)}>Remove</button>
+              <button onClick={() => removeItem(item.id)}>-</button>
             </div>
           ))
         ) : (
