@@ -17,7 +17,14 @@ interface CartContextType {
   onClose: () => void; 
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType>({
+  cart: [],
+  addToCart: () => {},
+  updateQuantity: () => {},
+  removeItem: () => {},
+  calculateTotal: () => 0,
+  onClose: () => {} 
+});
 
 export const useCart = () => {
   const context = useContext(CartContext);
@@ -36,8 +43,18 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const [, setIsOpen] = useState(false);
 
   const addToCart = (product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
-  };
+    const existingProductIndex = cart.findIndex((item) => item.id === product.id);
+    if (existingProductIndex !== -1) {
+        const updatedCart = [...cart];
+        updatedCart[existingProductIndex].quantity++;
+        setCart(updatedCart);
+        console.log(`Die Menge von ${product.title} im Warenkorb wurde erhöht.`);
+    } else {
+        const updatedProduct: Product = { ...product, quantity: 1 };
+        setCart((prevCart) => [...prevCart, updatedProduct]);
+        console.log(`${product.title} wurde dem Warenkorb hinzugefügt.`);
+    }
+};
 
   const updateQuantity = (id: number, newQuantity: number) => {
     const updatedCart = cart.map((item) =>

@@ -3,11 +3,10 @@ import { Outlet, Link } from "react-router-dom";
 
 export default function Home(){
     return(
-        <>
+        <div className="home">
         <h1>Herzlich willkommen in meinem Shop!</h1>
-        <p>Hier finden Sie alles was Sie brauchen.</p>
-        <Link to="/shop"> Zum Shop</Link>
+        <Link to="/shop" className="shop-btn"> Zum Shop</Link>
         <Outlet />
-        </>
+        </div>
     )
 }
