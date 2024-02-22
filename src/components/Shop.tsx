@@ -6,18 +6,22 @@ interface Props{
     title:string;
     description:string;
     price:number;
-    addToCart: (product: Props) => void;
 }
 
-export default function Shop({addToCart}:Props){
+export default function Shop(){
     const [products, setProducts] = useState<Props[]>([]);
+    const [cart, setCart] = useState<Props[]>([]);
 
     useEffect(() => {
         fetch("https://fakestoreapi.com/products")
         .then(response => response.json())
         .then(data => setProducts(data));
     }, []);
-
+    const addToCart = (product: Props) => {
+        const updatedCart = [...cart, product];
+        setCart(updatedCart);
+        console.log(`${product.title} wurde dem Warenkorb hinzugefügt.`);
+      };
     
     return(
         <div>
@@ -28,7 +32,7 @@ export default function Shop({addToCart}:Props){
                         <h3>{product.title}</h3>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
-                        <Link to={`/shop${product.id}`}>Details</Link>
+                        <Link to={`/shop/${product.id}`}>Details</Link>
                         <button onClick={() => addToCart(product)}>Add to Cart</button>
                     </div>
                 ))}
