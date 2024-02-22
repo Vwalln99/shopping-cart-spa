@@ -31,7 +31,6 @@ export default function Shop(){
                     <div key={product.id} className="products">
                         <h3>{product.title}</h3>
                         <img className="img"src={product.image} alt={product.title} />
-                        <p>{product.description}</p>
                         <p className="price">{product.price} €</p>
                         <Link to={`/shop/${product.id}`}>Details</Link>
                         <button onClick={() => addToCart(product)}>Add to Cart</button>
