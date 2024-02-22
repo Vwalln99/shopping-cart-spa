@@ -12,6 +12,7 @@ export default function Cart() {
   return (
     <div>
       <h2>Cart</h2>
+      <button className="btn-close" onClick={handleOpenShop}>X</button>
       <div className="cart">
         {cart.length > 0 ? (
           cart.map((item) => (
@@ -31,7 +32,6 @@ export default function Cart() {
         )}
       </div>
       <h3 className="cart-total">Total: € {calculateTotal()}</h3>
-      <button onClick={handleOpenShop}>Close</button>
     </div>
   );
 }
